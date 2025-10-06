@@ -1,3 +1,4 @@
+
 <html>
     <head>
         
@@ -87,7 +88,7 @@
                           
                         
                                                                                   }
-                        if(Role == "All&nbsp;Rounder"){
+                        if(Role == "Allrounder"){
                           var button="<button onclick= ADD_player(Player,Role)>+</button";
                           rowid="table5"+Player;
                           document.getElementById("table5").innerHTML +=
@@ -227,7 +228,7 @@
           document.getElementById("table4"+player).remove();
           }
 
-          if (links == "All Rounder"){
+          if (links == "Allrounder"){
           document.getElementById("table5"+player).remove();
           }
 
@@ -324,7 +325,7 @@
  
           }
 
-          if( links == "All Rounder") {
+          if( links == "All Rounder") {
           var table = document.getElementById("table5");
           var row = table.insertRow(0);
           row.id = "table5"+player;
