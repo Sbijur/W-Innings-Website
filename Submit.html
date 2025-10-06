@@ -2,6 +2,7 @@
 <html>
     <head>
         
+        
       <meta name="google-signin-client_id" content="790630026221-3fn7kt41k5leo81ensl2jda206ubf1vr.apps.googleusercontent.com">
       <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -14,7 +15,6 @@
         <link href="./assets/css/style.css" rel="stylesheet">
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -24,8 +24,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 
         <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -35,6 +34,28 @@
         <script src="assets/js/main.js"></script>
 
         <script type="text/javascript">
+            var email = "";
+var name = "";
+var currentCaptain = "";
+
+function handleCredentialResponse(response) {
+  try {
+    const data = JSON.parse(atob(response.credential.split('.')[1]));
+    email = data.email || "";
+    name = data.name || "";
+    console.log("✅ Signed in:", name, email);
+
+    sessionStorage.setItem("email", email);
+    sessionStorage.setItem("name", name);
+
+    // Optional: update UI
+    const msg = document.querySelector("h6");
+    if (msg) msg.textContent = "Signed in as " + name;
+  } catch (err) {
+    console.error("Error parsing credential:", err);
+  }
+}
+
             
               var Player ;
               var Country;
@@ -125,21 +146,7 @@
 
              
 
-            var email="";
-            //var email;
-            var name;
-function handleCredentialResponse(response) {
-  const data = JSON.parse(atob(response.credential.split('.')[1]));
-  email = data.email;
-  name = data.name;
-  console.log("Signed in as:", name, email);
-
-  sessionStorage.setItem('email', email);
-  sessionStorage.setItem('name', name);
-
-  // Optionally show confirmation
-  alert(`Signed in as ${name}`);
-}
+    
 
 
 
@@ -863,44 +870,14 @@ max-width: 200px;
               }
          
           </script>
+    </body>
+</html>
 
 
-          <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+        
             <!-- Google Sign-In Button using new API -->
 
 
-<script>
-  // Handle Google login credentials (new API)
-  function handleCredentialResponse(response) {
-    const data = JSON.parse(atob(response.credential.split('.')[1]));
-    console.log("Google user:", data);
-    sessionStorage.setItem('email', data.email);
-    sessionStorage.setItem('name', data.name);
-  }
-</script>
+
   <!-- Google Identity Services -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
-<script>
-  function handleCredentialResponse(response) {
-    const data = jwt_decode(response.credential);
-    sessionStorage.setItem("email", data.email);
-    sessionStorage.setItem("name", data.name);
-    console.log("Signed in as:", data.email);
-    alert(`Signed in as ${data.name}`);
-  }
 
-  window.addEventListener('load', () => {
-    google.accounts.id.initialize({
-      client_id: "1014631985252-bbpv1gnnfog8o85ud0901l42pg4p4bml.apps.googleusercontent.com",
-      callback: handleCredentialResponse,
-      auto_select: false,
-      ux_mode: "popup" // 👈 critical: prevents iframe embedding that CSP blocks
-    });
-
-    google.accounts.id.renderButton(
-      document.querySelector(".g_id_signin"),
-      { theme: "outline", size: "large", width: "250" }  // customization attributes
-    );
-  });
-</script>
