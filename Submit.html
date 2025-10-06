@@ -1,7 +1,7 @@
 <html>
     <head>
         
-      <meta name="google-signin-client_id" content="1014631985252-bbpv1gnnfog8o85ud0901l42pg4p4bml.apps.googleusercontent.com">
+      <meta name="google-signin-client_id" content="790630026221-3fn7kt41k5leo81ensl2jda206ubf1vr.apps.googleusercontent.com">
       <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <title>W-INNINGS</title>
@@ -14,7 +14,7 @@
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <title>W-INNINGS</title>
@@ -540,32 +540,7 @@ max-width: 200px;
 </style>
 
        
-    
-<!-- New Google Identity Services -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script>
-  function handleCredentialResponse(response) {
-    const data = jwt_decode(response.credential);
-    const email = data.email;
-    const name = data.name;
-    sessionStorage.setItem('email', email);
-    sessionStorage.setItem('name', name);
-    console.log("Signed in as:", email);
-  }
-  window.onload = function() {
-    google.accounts.id.initialize({
-      client_id: "1014631985252-bbpv1gnnfog8o85ud0901l42pg4p4bml.apps.googleusercontent.com",
-      callback: handleCredentialResponse
-    });
-    google.accounts.id.renderButton(
-      document.querySelector(".g-signin2"), 
-      { theme: "outline", size: "large" }
-    );
-  }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
-
-</head>
+    </head>
     <body style=" min-width: fit-content;">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #062141 !important; color: #fff"> 
         <div class="container-fluid">
@@ -796,7 +771,9 @@ max-width: 200px;
             <div class="col" style="width:150px; margin-top: 10px;">
               <center><div class="container" style="padding:0px">
                 <h6>Sign In to Submit your Team</h6>
-                <div id="g_id_signin"></div></center>
+                <div class="g-signin2" data-onsuccess="onSignIn" data-width="240" data-height="50" data-longtitle="true">
+
+                </div></center>
               <div class="d-flex flex-column">
  <button type="submit" class="btn btn-primary btn-sm mt-4" onclick="document.getElementById('submitform').click();">Submit Team</button>
               <button type="button" class="btn btn-primary btn-sm col mt-2 mb-2" onclick="store()" >View Submitted Team</button>
@@ -857,7 +834,7 @@ max-width: 200px;
             if(SubmitData()==true)
             {
               e.preventDefault()
-              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+              fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
               .then(response => console.log('Success!', response))
               .catch(error => console.error('Error!', error.message))
             }
@@ -872,6 +849,37 @@ max-width: 200px;
           </script>
 
 
-          
+          <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+            <!-- Google Sign-In Button using new API -->
+<div id="g_id_onload"
+     data-client_id="1014631985252-bbpv1gnnfog8o85ud0901l42pg4p4bml.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-shape="rectangular"
+     data-theme="outline"
+     data-text="signin_with"
+     data-size="large"
+     data-logo_alignment="left">
+</div>
+
+<script>
+  // Handle Google login credentials (new API)
+  function handleCredentialResponse(response) {
+    const data = JSON.parse(atob(response.credential.split('.')[1]));
+    console.log("Google user:", data);
+    sessionStorage.setItem('email', data.email);
+    sessionStorage.setItem('name', data.name);
+  }
+</script>
+
+
+
+
+
+
+                
     </body>
 </html>
