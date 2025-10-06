@@ -128,15 +128,19 @@
             var email="";
             //var email;
             var name;
-            function onSignIn(googleUser){
-                        var profile=googleUser.getBasicProfile();
-                       email=profile.getEmail()
-                        name=profile.getName();
-                       
-                        console.log(email);
-                       sessionStorage.setItem('email',email);
-                       sessionStorage.setItem('name',name);
-                    }
+function handleCredentialResponse(response) {
+  const data = JSON.parse(atob(response.credential.split('.')[1]));
+  email = data.email;
+  name = data.name;
+  console.log("Signed in as:", name, email);
+
+  sessionStorage.setItem('email', email);
+  sessionStorage.setItem('name', name);
+
+  // Optionally show confirmation
+  alert(`Signed in as ${name}`);
+}
+
 
 
         let count_bat=0,count_bowl=0,count_allround=0,count_wk=0,count_total=0;
