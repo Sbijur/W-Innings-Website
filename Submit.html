@@ -1,12 +1,49 @@
 <html>
     <head>
+
         
-      <meta name="google-signin-client_id" content="1014631985252-bbpv1gnnfog8o85ud0901l42pg4p4bml.apps.googleusercontent.com">
-      <meta charset="utf-8">
+            <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <title>W-INNINGS</title>
         <meta content="" name="descriptison">
         <meta content="" name="keywords">
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>W-INNINGS</title>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Google Sign-In callback -->
+  <script>
+    function decodeJwtResponse(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    }
+
+    function handleCredentialResponse(response) {
+      const data = decodeJwtResponse(response.credential);
+      const email = data.email;
+      const name = data.name || "";
+      // Store for existing logic
+      sessionStorage.setItem('email', email);
+      sessionStorage.setItem('name', name);
+
+      // Show bubble alert
+      alert(`✅ Email recorded: ${email}`);
+      console.log("Google Sign-In success:", email, name);
+    }
+  </script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -135,7 +172,6 @@
                         console.log(email);
                        sessionStorage.setItem('email',email);
                        sessionStorage.setItem('name',name);
-                       alert("✅ Email recorded: ${email}");
                     }
 
 
@@ -228,7 +264,7 @@
           document.getElementById("table4"+player).remove();
           }
 
-          if (links == "Allrounder"){
+          if (links == "All Rounder"){
           document.getElementById("table5"+player).remove();
           }
 
@@ -465,6 +501,7 @@
           
           function store () {
           sessionStorage.setItem("email",email);
+          print(email);
             
           // (C) REDIRECT
           window.open("Submissions.html");
@@ -774,7 +811,14 @@ max-width: 200px;
             <div class="col" style="width:150px; margin-top: 10px;">
               <center><div class="container" style="padding:0px">
                 <h6>Sign In to Submit your Team</h6>
-                <div class="g-signin2" data-onsuccess="onSignIn" data-width="240" data-height="50" data-longtitle="true">
+                    <div id="g_id_onload"
+         data-client_id="1014631985252-bbpv1gnnfog8o85ud0901l42pg4p4bml.apps.googleusercontent.com"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
 
                 </div></center>
               <div class="d-flex flex-column">
