@@ -14,26 +14,44 @@
         <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
         <link href="./assets/css/style.css" rel="stylesheet">
 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>W-INNINGS</title>
-        <meta content="" name="descriptison">
-        <meta content="" name="keywords">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+<!-- Google Charts (can load async) -->
+<script src="https://www.gstatic.com/charts/loader.js" defer></script>
 
+<!-- Google Identity Services (already async + defer) -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
-        <script src="assets/vendor/jquery/jquery.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-        <script src="assets/vendor/jquery-countdown/jquery.countdown.min.js"></script>
-        <script src="assets/js/main.js"></script>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>W-INNINGS</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
 
-        <script type="text/javascript">
+<!-- Fonts & CSS -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+
+<!-- Vendor JS (deferred for safe DOM load) -->
+<script src="assets/vendor/jquery/jquery.min.js" defer></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+<script src="assets/vendor/jquery.easing/jquery.easing.min.js" defer></script>
+<script src="assets/vendor/php-email-form/validate.js" defer></script>
+<script src="assets/vendor/jquery-countdown/jquery.countdown.min.js" defer></script>
+
+<!-- Your main JS logic (deferred to run after all above) -->
+<script src="assets/js/main.js" defer></script>
+
+<!-- Inline JS (runs after all defer scripts above) -->
+<script type="text/javascript" defer>
+  // all your inline JavaScript here
+  window.addEventListener("load", function() {
+    console.log("All scripts loaded, DOM ready!");
+    // call your init functions here, e.g.:
+    // initGoogleSignIn();
+    // loadTeamData();
+  });
+</script>
+
             var email = "";
 var name = "";
 var currentCaptain = "";
